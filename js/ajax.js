@@ -20,5 +20,4 @@ $(function(){
 
     })
 
-    console.log('simon')
 })
