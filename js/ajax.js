@@ -1,6 +1,7 @@
 $(function(){
     
     $("#task-result").hide();
+    
 
     $('#search').keyup(()=>{
         let search = $('#search').val();
