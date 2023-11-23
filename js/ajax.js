@@ -10,14 +10,11 @@ $(function(){
             type: 'post',
             success: function( response ){
                 if (!response.error) {
-
                     let tasks = response;
-                    console.log(tasks)
-
+                    console.log( JSON.parse(tasks))
                 }
             }
         })
-
     })
 
 })
