@@ -31,8 +31,21 @@ $(function(){
     $('#task-form').submit( e =>{
         e.preventDefault();
 
-        
+        const postData = {
+            name: $("name").val(),
+            description: $("#description").val()
+        }
 
+        $.ajax({
+            url: "php/agregar-tarea.php",
+            data: { postData },
+            type: "post",
+            success: function( response ){
+                if (!response.error) {
+                    $("#task-form").trigger("reset")
+                }
+            }
+        })
 
     } )
 
