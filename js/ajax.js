@@ -30,9 +30,11 @@ $(function(){
         const postData = {
             name: $("#name").val(),
             description: $("#description").val(),
+            id: $("#taskId").val()
         }
+        const url = edit === false ? "php/agregar-tarea.php": "php/editar-tarea.php";
         $.ajax({
-            url: "php/agregar-tarea.php",
+            url: url,
             data:  postData ,
             type: "post",
             success: function( response ){
@@ -44,6 +46,7 @@ $(function(){
             }
         })
     })
+
     function fetchTask(){
         $.ajax({
             type: "get",
@@ -94,6 +97,7 @@ $(function(){
                     $("#name").val (task.name)
                     $("#description").val (task.description)
                     $("#taskId").val (task.id)
+                    edit = true;
 
                 }
             }
