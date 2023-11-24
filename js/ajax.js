@@ -1,5 +1,6 @@
 $(function(){
     $("#task-result").hide();
+    fetchTask();
 
     $('#search').keyup(()=>{
         if ($("#search").val()) {
@@ -35,6 +36,7 @@ $(function(){
             type: "post",
             success: function( response ){
                 if (!response.error) {
+                    fetchTask();
                     $("#task-form").trigger("reset")
                     console.log(response)
                 }
@@ -52,15 +54,16 @@ $(function(){
                 let template = ``;
                 tasks.forEach( task =>{
                     template += `
-                    <tr>${task.id}</tr>
-                    <tr>${task.name}</tr>
-                    <tr>${task.description}</tr>
+                    <tr>
+                        <td>${task.id}</td>
+                        <td>${task.name}</td>
+                        <td>${task.description}</td>
+                    </tr>
                     `;
                 });
                 $("#tasks").html( template );
             }
         })
     }
-
 
 })
