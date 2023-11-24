@@ -43,7 +43,6 @@ $(function(){
             }
         })
     })
-
     function fetchTask(){
         $.ajax({
             type: "get",
@@ -54,10 +53,11 @@ $(function(){
                 let template = ``;
                 tasks.forEach( task =>{
                     template += `
-                    <tr>
+                    <tr  taskId = '${task.id}' >
                         <td>${task.id}</td>
                         <td>${task.name}</td>
                         <td>${task.description}</td>
+                        <td> <button class = "btn btn-danger task-delete">   Eliminar </buton> </td>
                     </tr>
                     `;
                 });
@@ -65,5 +65,16 @@ $(function(){
             }
         })
     }
+
+    $(document).on("click",".task-delete",()=>{
+        if (confirm("seguro que quieres eliminar esa tarea")) {
+            const element = $(this)[0].activeElement.parentElement.parentElement;
+            const id = $(element).attr("taskId");
+            $.post("php/eliminar-tarea.php", {id}, ()=>{
+                fetchTask();
+            } )
+        }
+    })
+
 
 })
