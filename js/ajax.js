@@ -1,6 +1,7 @@
 $(function(){
     $("#task-result").hide();
     fetchTask();
+    let edit = false;
 
     $('#search').keyup(()=>{
         if ($("#search").val()) {
@@ -57,7 +58,10 @@ $(function(){
                         <td>${task.id}</td>
                         <td>${task.name}</td>
                         <td>${task.description}</td>
-                        <td> <button class = "btn btn-danger task-delete">   Eliminar </buton> </td>
+                        <td> 
+                            <button class = "btn btn-danger task-delete me-2">   Eliminar </buton>
+                            <button class = "btn btn-warning task-item">   Editar </buton>
+                        </td>
                     </tr>
                     `;
                 });
@@ -74,6 +78,26 @@ $(function(){
                 fetchTask();
             } )
         }
+    })
+
+    $(document).on("click",".task-item",()=>{
+        const element = $(this)[0].activeElement.parentElement.parentElement;
+        const id = $(element).attr("taskId");
+        let url = "php/obtener-una-tarea.php"
+        $.ajax({
+            type: "post",
+            url,
+            data: { id },
+            success: function( response ){
+                if (!response.error) {
+                    const task = JSON.parse(response)
+                    $("#name").val (task.name)
+                    $("#description").val (task.description)
+                    $("#taskId").val (task.id)
+
+                }
+            }
+        })
     })
 
 
