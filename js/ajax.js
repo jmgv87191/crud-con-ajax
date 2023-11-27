@@ -32,6 +32,7 @@ $(function(){
             description: $("#description").val(),
             id: $("#taskId").val()
         }
+
         const url = edit === false ? "php/agregar-tarea.php": "php/editar-tarea.php";
         $.ajax({
             url: url,
@@ -48,6 +49,7 @@ $(function(){
     })
 
     function fetchTask(){
+
         $.ajax({
             type: "get",
             url: "php/listar-tarea.php",
@@ -98,11 +100,17 @@ $(function(){
                     $("#description").val (task.description)
                     $("#taskId").val (task.id)
                     edit = true;
-
                 }
             }
         })
     })
 
+    let btn_enviar = document.querySelector('.btn_enviar');
+
+    btn_enviar.addEventListener('click',()=>{
+        setTimeout(() => {
+            edit= false
+        }, 100);
+    })
 
 })
